@@ -4,7 +4,7 @@
   "description": "API Service for replate application.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha src/test --require @babel/register --exit || true",
+    "test": "mocha src/__test__ --require @babel/register --exit || true",
     "start": "node app",
     "dev": "nodemon --exec babel-node src/app",
     "build": "babel src -d build",
