@@ -4,8 +4,8 @@ import chai from 'chai';
 const { expect } = chai;
 
 describe('Sample Test', () => {
-  it('should return -1 when the value is not present', () => {
-    const me = 1;
-    expect(me).to.equal(1);
+  it('test if 1=1', () => {
+    const one = 1;
+    expect(one).to.equal(1);
   });
 });
