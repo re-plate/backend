@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API Service for replate application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/re-plate/backend.git"
+  },
+  "keywords": [
+    "API",
+    "Node",
+    "Backend"
+  ],
+  "author": "Ezekiel Ekunola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/re-plate/backend/issues"
+  },
+  "homepage": "https://github.com/re-plate/backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
