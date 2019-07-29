@@ -11,9 +11,10 @@
     "lint": "eslint src",
     "serve": "node build/app",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "migrate": "knex migrate:latest ",
-    "unmigrate": "knex migrate:rollback",
-    "seed": "knex seed:run"
+    "migrate": "babel-node node_modules/.bin/knex migrate:latest",
+    "unmigrate": "babel-node node_modules/.bin/knex migrate:rollback",
+    "seed": "babel-node node_modules/.bin/knex seed:run",
+    "migrations": "npm run unmigrate && npm run migrate && npm run seed"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,9 @@
     "url": "https://github.com/re-plate/backend/issues"
   },
   "nyc": {
-    "exclude": []
+    "exclude": [
+      "src/__test__"
+    ]
   },
   "homepage": "https://github.com/re-plate/backend#readme",
   "dependencies": {
