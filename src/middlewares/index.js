@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
+import { getById } from '../models/auth';
+
 dotenv.config();
 
 const validateInput = validationMethod => (req, res, next) => {
@@ -35,4 +37,36 @@ const validateToken = (req, res, next) => {
   }
 };
 
-export { validateInput, validateToken };
+const isBusiness = async (req, res, next) => {
+  const existingUser = await getById(req.user_id);
+  if (existingUser) {
+    if (existingUser.id !== 1) {
+      return res.status(403).json({
+        status: 'error',
+        message: 'You are not allowed to perform this action',
+      });
+    }
+    return next();
+  }
+
+  return res.status(404).json({ status: 'error', message: 'User not found' });
+};
+
+const isVolunteer = async (req, res, next) => {
+  const existingUser = await getById(req.user_id);
+  if (existingUser) {
+    if (existingUser.id !== 2) {
+      return res.status(403).json({
+        status: 'error',
+        message: 'You are not allowed to perform this action',
+      });
+    }
+    return next();
+  }
+
+  return res.status(404).json({ status: 'error', message: 'User not found' });
+};
+
+export {
+  validateInput, validateToken, isBusiness, isVolunteer,
+};

@@ -3,7 +3,7 @@ import express from 'express';
 import RequestController from '../controllers/request';
 
 import { validateRequestInput } from '../validations/request';
-import { validateInput, validateToken } from '../middlewares';
+import { validateInput, validateToken, isBusiness } from '../middlewares';
 
 const requestController = new RequestController();
 
@@ -17,6 +17,7 @@ const Router = express.Router();
 Router.post(
   '/',
   validateToken,
+  isBusiness,
   validateInput(validateRequestInput),
   createRequest,
 );

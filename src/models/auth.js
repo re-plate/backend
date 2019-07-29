@@ -4,8 +4,18 @@ const insert = userData => db('users')
   .insert(userData)
   .returning('*');
 
-const getByUsername = username => db('users').where({ username }).first();
+const getByUsername = username => db('users')
+  .where({ username })
+  .first();
 
-const getByEmail = email => db('users').where({ email }).first();
+const getByEmail = email => db('users')
+  .where({ email })
+  .first();
 
-export { insert, getByUsername, getByEmail };
+const getById = id => db('users')
+  .where({ id })
+  .first();
+
+export {
+  insert, getByUsername, getByEmail, getById,
+};
