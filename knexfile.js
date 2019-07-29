@@ -11,9 +11,9 @@ module.exports = {
     seeds: { directory: './src/data/seeds' },
   },
 
-  staging: {
+  testing: {
     client: 'pg',
-    connection: process.env.DB_URL,
+    connection: process.env.DB_TEST_URL,
     searchPath: ['knex', 'public'],
     migrations: {
       directory: './src/data/migrations',

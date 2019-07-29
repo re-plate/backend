@@ -4,16 +4,16 @@
   "description": "API Service for replate application.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha src/**/*.test.js --require @babel/register --exit || true",
+    "test": "NODE_ENV=testing  mocha src/**/*.test.js --require @babel/register  --timeout 10000 --exit || true",
     "start": "npm run build && npm run serve",
     "dev": "nodemon --exec babel-node src/app",
     "build": "babel src -d build",
     "lint": "eslint src",
     "serve": "node build/app",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "migrate:latest": "knex migrate:latest ",
-    "migrate:rollback": "knex migrate:rollback",
-    "seeds": "knex seed:run"
+    "migrate": "knex migrate:latest ",
+    "unmigrate": "knex migrate:rollback",
+    "seed": "knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -54,6 +54,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.5.5",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "coveralls": "^3.0.5",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",

@@ -23,8 +23,8 @@ class Auth extends BaseController {
       }
 
       const {
-        username, email, password, type, name,
-      } = req.body;
+ username, email, password, type, name,
+} = req.body;
 
       const hashedPassword = hashPassword(password);
       const userData = {
