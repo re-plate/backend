@@ -5,13 +5,15 @@ const validateSignupInput = (input) => {
   const errors = {};
   const data = input;
 
-  data.name = !isEmpty(data.username) ? data.username : '';
+  data.username = !isEmpty(data.username) ? data.username : '';
   data.email = !isEmpty(data.email) ? data.email : '';
   data.password = !isEmpty(data.password) ? data.password : '';
   data.type = !isEmpty(data.type) ? data.type : '';
-  data.type = !isEmpty(data.name) ? data.name : '';
+  data.name = !isEmpty(data.name) ? data.name : '';
 
   data.name = data.name.trim();
+  data.password = String(data.password);
+
   const isNameValid = data.name.split(' ').every((word) => {
     if (!word) {
       return true;
@@ -78,4 +80,6 @@ const validateSignupInput = (input) => {
   };
 };
 
-export { validateSignupInput };
+const me = '1';
+
+export { validateSignupInput, me };
