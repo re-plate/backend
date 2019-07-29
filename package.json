@@ -1,0 +1,71 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API Service for replate application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "NODE_ENV=testing  mocha src/**/*.test.js --require @babel/register  --timeout 10000 --exit || true",
+    "start": "npm run build && npm run serve",
+    "dev": "nodemon --exec babel-node src/app",
+    "build": "babel src -d build",
+    "lint": "eslint src",
+    "serve": "node build/app",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "migrate": "babel-node node_modules/.bin/knex migrate:latest",
+    "unmigrate": "babel-node node_modules/.bin/knex migrate:rollback",
+    "seed": "babel-node node_modules/.bin/knex seed:run",
+    "migrations": "npm run unmigrate && npm run migrate && npm run seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/re-plate/backend.git"
+  },
+  "keywords": [
+    "API",
+    "Node",
+    "Backend"
+  ],
+  "engines": {
+    "npm": "6.10.0",
+    "node": "10.14.1"
+  },
+  "author": "Ezekiel Ekunola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/re-plate/backend/issues"
+  },
+  "nyc": {
+    "exclude": [
+      "src/__test__"
+    ]
+  },
+  "homepage": "https://github.com/re-plate/backend#readme",
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.19.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.12.0",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.0.5",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
+    "nyc": "^14.1.1"
+  }
+}
