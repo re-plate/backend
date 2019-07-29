@@ -5,10 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha src/__test__ --require @babel/register --exit || true",
-    "start": "node app",
+    "start": "npm run build && npm run serve",
     "dev": "nodemon --exec babel-node src/app",
     "build": "babel src -d build",
     "lint": "eslint src",
+    "serve": "node build/app",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "migrate:latest": "knex migrate:latest ",
     "migrate:rollback": "knex migrate:rollback",
