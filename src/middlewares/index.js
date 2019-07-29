@@ -1,3 +1,8 @@
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const validateInput = validationMethod => (req, res, next) => {
   const { errors, isValid } = validationMethod(req.body);
 
@@ -9,4 +14,24 @@ const validateInput = validationMethod => (req, res, next) => {
   next();
 };
 
-export default validateInput;
+const validateToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: 'error', message: 'No Token Provided' });
+  }
+
+  try {
+    const data = jwt.verify(token, process.env.JWT_SECRET);
+    if (data) {
+      next();
+    }
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ status: 'error', message: 'Invalid Token Provided' });
+  }
+};
+
+export { validateInput, validateToken };
