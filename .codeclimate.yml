@@ -6,7 +6,7 @@ exclude_patterns:
 checks: 
   method-lines: 
     config: 
-      threshold: 60
-  method-complexity:
+      threshold: 80
+  complex-logic:
     enabled: false
 
