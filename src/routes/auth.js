@@ -9,7 +9,7 @@ const authController = new AuthController();
 const authMiddeware = new AuthMiddleware();
 
 const { register } = authController;
-const { validateUserName } = authMiddeware;
+const { validateUserName, validateEmail } = authMiddeware;
 const Router = express.Router();
 // @route   POST api/v1/auth/register
 // @desc    Register user
@@ -18,6 +18,7 @@ Router.post(
   '/register',
   validateInput(validateSignupInput),
   validateUserName,
+  validateEmail,
   register,
 );
 
