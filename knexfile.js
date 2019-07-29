@@ -6,9 +6,9 @@ module.exports = {
     connection: process.env.DB_URL,
     searchPath: ['knex', 'public'],
     migrations: {
-      directory: './data/migrations',
+      directory: './src/data/migrations',
     },
-    seeds: { directory: './data/seeds' },
+    seeds: { directory: './src/data/seeds' },
   },
 
   staging: {
@@ -16,9 +16,9 @@ module.exports = {
     connection: process.env.DB_URL,
     searchPath: ['knex', 'public'],
     migrations: {
-      directory: './data/migrations',
+      directory: './src/data/migrations',
     },
-    seeds: { directory: './data/seeds' },
+    seeds: { directory: './src/data/seeds' },
   },
 
   production: {
@@ -26,8 +26,8 @@ module.exports = {
     connection: process.env.DB_URL,
     searchPath: ['knex', 'public'],
     migrations: {
-      directory: './data/migrations',
+      directory: './src/data/migrations',
     },
-    seeds: { directory: './data/seeds' },
+    seeds: { directory: './src/data/seeds' },
   },
 };
