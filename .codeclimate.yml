@@ -1,0 +1,9 @@
+exclude_patterns:
+- "src/__test__/"
+- "knexfile.js/"
+- "**/vendor/"
+
+checks: 
+  method-count: 
+    config: 
+      threshold: 60
