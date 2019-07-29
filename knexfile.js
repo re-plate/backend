@@ -1,14 +1,14 @@
-// Update with your config settings.
-import dotenv from 'dotenv';
-
-dotenv.config();
+require('dotenv').config();
 
 module.exports = {
   development: {
     client: 'pg',
-    connection: {
-      filename: './dev.sqlite3',
+    connection: process.env.DB_URL,
+    searchPath: ['knex', 'public'],
+    migrations: {
+      directory: './data/migrations',
     },
+    seeds: { directory: './data/seeds' },
   },
 
   staging: {
