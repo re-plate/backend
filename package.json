@@ -4,7 +4,7 @@
   "description": "API Service for replate application.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha src/__test__ --require @babel/register --exit || true",
+    "test": "mocha src/**/*.test.js --require @babel/register --exit || true",
     "start": "npm run build && npm run serve",
     "dev": "nodemon --exec babel-node src/app",
     "build": "babel src -d build",
@@ -43,6 +43,7 @@
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
     "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -51,6 +52,7 @@
     "validator": "^11.1.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "chai": "^4.2.0",
     "coveralls": "^3.0.5",
     "eslint": "^5.16.0",

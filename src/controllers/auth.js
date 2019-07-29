@@ -1,5 +1,5 @@
 import { validateSignupInput } from '../validations/auth';
-import { hashPassword, verifyPassword } from '../utils';
+import { hashPassword } from '../utils';
 import { insert } from '../models/auth';
 
 class Auth {

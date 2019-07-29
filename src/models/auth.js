@@ -4,4 +4,6 @@ const insert = userData => db('users')
   .insert(userData)
   .returning('*');
 
-export { insert };
+const getByUsername = username => db('users').where({ username });
+
+export { insert, getByUsername };
