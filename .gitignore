@@ -62,3 +62,7 @@ typings/
 
 #build
 build
+
+#DS_STORE
+.DS_Store
+src/.DS_Store
