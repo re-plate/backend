@@ -9,7 +9,10 @@
     "dev": "nodemon --exec babel-node src/app",
     "build": "babel src -d build",
     "lint": "eslint src",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "migrate:latest": "knex migrate:latest ",
+    "migrate:rollback": "knex migrate:rollback",
+    "seeds": "knex seed:run"
   },
   "repository": {
     "type": "git",
