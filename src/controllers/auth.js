@@ -1,11 +1,11 @@
 import BaseController from './base';
 
-import { hashPassword } from '../utils';
-import { insert } from '../models/auth';
+import { hashPassword, verifyPassword, generateToken } from '../utils';
+import { insert, getByUsername } from '../models/auth';
 
 class Auth extends BaseController {
   /**
-   * Signup Route
+   * Register Route
    * @param {object} req
    * @param {object} res
    * @returns {object} object
@@ -49,6 +49,43 @@ class Auth extends BaseController {
       }
     } catch (error) {
       return super.error(res, 500, 'Unable to register user');
+    }
+  }
+
+  /**
+   * Login Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route POST api/v1/auth/login
+   * @description This function implements the logic for logging in a new user.
+   * @access Public
+   */
+  async login(req, res) {
+    try {
+      const { username, password } = req.body;
+
+      const existingUser = await getByUsername(username);
+
+      if (existingUser) {
+        const isValidPassword = verifyPassword(password, existingUser.password);
+
+        if (isValidPassword === true) {
+          const payload = {
+            id: existingUser.id,
+          };
+          const token = generateToken(payload);
+
+          const data = {
+            token,
+          };
+          return super.success(res, 200, 'Login successful', data);
+        }
+        return super.error(res, 401, 'Invalid Password');
+      }
+      return super.error(res, 404, 'User not found');
+    } catch (error) {
+      return super.error(res, 500, 'Unable to login user');
     }
   }
 }

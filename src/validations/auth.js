@@ -84,5 +84,26 @@ const validateSignupInput = (input) => {
   };
 };
 
+const validateLoginInput = (input) => {
+  const errors = {};
+  const data = input;
+  data.username = !isEmpty(data.username) ? data.username : '';
+  data.password = !isEmpty(data.password) ? data.password : '';
 
-export { validateSignupInput };
+  data.password = String(data.password);
+
+  if (Validator.isEmpty(data.username)) {
+    errors.username = 'Username field is required';
+  }
+
+  if (Validator.isEmpty(data.password)) {
+    errors.password = 'Password field is required';
+  }
+
+  return {
+    errors,
+    isValid: isEmpty(errors),
+  };
+};
+
+export { validateSignupInput, validateLoginInput };

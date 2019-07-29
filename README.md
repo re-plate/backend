@@ -27,11 +27,25 @@ Access: Public
 Method: POST
 Route: /api/v1/auth/register
 Payload: {
-    name: STRING,
-    username: STRING,
-    email: STRING,
-    password: STRING
-    type: INTEGER,
+    name: STRING (required),
+    username: STRING (required),
+    email: STRING (required),
+    password: STRING (required),
+    type: INTEGER (required),
+    phone: INTEGER (optional)
+}
+</code>
+</pre>
+
+<pre>
+<h3>Login Route </h3>
+<code>
+Access: Public
+Method: POST
+Route: /api/v1/auth/login
+Payload: {
+    username: STRING (required),
+    password: STRING (required)
 }
 </code>
 </pre>
