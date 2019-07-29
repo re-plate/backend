@@ -6,6 +6,8 @@
 # backend
 API Service for replate application 🚀.
 
+> Link to API: https://re-plate.herokuapp.com/
+
 # How to setup the project
 
 - Create an account on [ElephantSQl](https://customer.elephantsql.com/instance)
