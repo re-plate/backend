@@ -1,6 +1,5 @@
-import { validateSignupInput } from "../validations/auth";
-
-// const { validateSignupInput } = authValidations;
+import { validateSignupInput } from '../validations/auth';
+import { hashPassword, verifyPassword } from '../utils';
 
 class Auth {
   /**
@@ -14,11 +13,15 @@ class Auth {
    */
   static register(req, res) {
     const { errors, isValid } = validateSignupInput(req.body);
-
+    let { password } = req.body;
     // Check validation
     if (!isValid) {
-      return res.status(400).json({ status: "error", errors });
+      return res.status(400).json({ status: 'error', errors });
     }
+
+    password = hashPassword(password);
+
+    // console.log(pass);
   }
 }
 
