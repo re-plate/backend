@@ -8,7 +8,10 @@ exports.up = knex => knex.schema.createTable('users', (tbl) => {
   tbl
     .integer('type')
     .notNullable()
+    .unsigned()
     .defaultTo(2);
+  tbl.text('email', 128).notNullable();
+  tbl.integer('phone').unsigned();
 });
 
 exports.down = knex => knex.schema.dropTableIfExists('users');
