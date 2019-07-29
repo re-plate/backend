@@ -1,11 +1,11 @@
 import BaseController from './base';
 
-import { hashPassword } from '../utils';
-import { insert } from '../models/auth';
+import { hashPassword, verifyPassword } from '../utils';
+import { insert, getByUsername } from '../models/auth';
 
 class Auth extends BaseController {
   /**
-   * Signup Route
+   * Register Route
    * @param {object} req
    * @param {object} res
    * @returns {object} object
@@ -16,8 +16,8 @@ class Auth extends BaseController {
   async register(req, res) {
     try {
       const {
-        username, email, password, type, name,
-      } = req.body;
+ username, email, password, type, name 
+} = req.body;
 
       const hashedPassword = hashPassword(password);
       const userData = {
@@ -49,6 +49,43 @@ class Auth extends BaseController {
       }
     } catch (error) {
       return super.error(res, 500, 'Unable to register user');
+    }
+  }
+
+  /**
+   * Login Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route POST api/v1/auth/login
+   * @description This function implements the logic for logging in a new user.
+   * @access Public
+   */
+  async login(req, res) {
+    try {
+      const { username, password } = req.body;
+
+      const existingUser = await getByUsername(username);
+      console.log(existingUser);
+      const isValidPassword = verifyPassword(password, existingUser.password);
+      console.log(isValidPassword);
+
+      if (isValidPassword === true) {
+        // const data = {
+
+        // }
+        return super.success(res, 200, 'Login successfull');
+      }
+      return super.error(res, 401, 'Invalid Password');
+
+      // return super.success(
+      //   res,
+      //   201,
+      //   'User registered successfully',
+
+      // );
+    } catch (error) {
+      return super.error(res, 500, 'Unable to login user');
     }
   }
 }
