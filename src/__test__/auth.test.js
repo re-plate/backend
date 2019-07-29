@@ -61,10 +61,10 @@ describe('Auth Routes', () => {
         expect(res).to.have.status(400);
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal('error');
-        expect(res.body.data.email).to.equal('Email field is required');
-        expect(res.body.data.password).to.equal('Password field is required');
-        expect(res.body.data.name).to.equal('Name field is required');
-        expect(res.body.data.type).to.equal('Type field is required');
+        expect(res.body.errors.email).to.equal('Email field is required');
+        expect(res.body.errors.password).to.equal('Password field is required');
+        expect(res.body.errors.name).to.equal('Name field is required');
+        expect(res.body.errors.type).to.equal('Type field is required');
         done();
       });
   });
