@@ -69,7 +69,7 @@ describe('Login Validation', () => {
     const result = validateLoginInput({});
     expect(result.isValid).to.equal(false);
     expect(Object.keys(result.errors).length).to.be.greaterThan(0);
-    expect(result.errors.email).to.equal('Email field is required');
+    expect(result.errors.username).to.equal('Username field is required');
     expect(result.errors.password).to.equal('Password field is required');
     expect(result.errors).to.be.an('object');
     done();
