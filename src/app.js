@@ -12,6 +12,21 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', authRoutes);
 
+app.use((req, res, next) => {
+  const error = new Error('Route Not found');
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    status: 'error',
+    message: error.message,
+  });
+  next();
+});
+
 const PORT = process.env.PORT || 3000;
 
 // eslint-disable-next-line no-console

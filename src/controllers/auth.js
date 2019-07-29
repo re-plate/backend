@@ -1,8 +1,9 @@
+import BaseController from './base';
 import { validateSignupInput } from '../validations/auth';
 import { hashPassword } from '../utils';
 import { insert } from '../models/auth';
 
-class Auth {
+class Auth extends BaseController {
   /**
    * Signup Route
    * @param {object} req
@@ -12,18 +13,18 @@ class Auth {
    * @description This function implements the logic for registering a new user.
    * @access Public
    */
-  static async register(req, res) {
+  async register(req, res) {
     try {
       const { errors, isValid } = validateSignupInput(req.body);
 
       // Check validation
       if (!isValid) {
-        return res.status(400).json({ status: 'error', errors });
+        return super.error(res, 400, '', errors);
       }
 
       const {
-        username, email, password, type, name,
-      } = req.body;
+ username, email, password, type, name 
+} = req.body;
 
       const hashedPassword = hashPassword(password);
       const userData = {
@@ -45,16 +46,15 @@ class Auth {
           name: newUser[0].name,
         };
 
-        return res.status(201).json({
-          status: 'success',
-          message: 'User registered successfully',
-          data: userResponse,
-        });
+        return super.success(
+          res,
+          201,
+          'User registered successfully',
+          userResponse,
+        );
       }
     } catch (error) {
-      return res
-        .status(500)
-        .json({ status: 'error', message: 'Unable to register user' });
+      return super.error(res, 500, 'Unable to register user');
     }
   }
 }
