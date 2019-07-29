@@ -9,21 +9,6 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Auth Routes', () => {
-  //   before((done) => {
-  //     // chai
-  //     //   .request(app)
-  //     //   .post('/api/v1/auth/register')
-  //     //   .send({
-  //     //     email: 'example@gmail.com',
-  //     //     password: '123456',
-  //     //   })
-  //     //   .end((err, res) => {
-  //     //     const { token } = res.body.data;
-  //     //     storeownertoken = token;
-  //     // done();
-
-  //   });
-
   beforeEach((done) => {
     db('users')
       .truncate()
