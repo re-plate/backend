@@ -38,33 +38,23 @@ const validateToken = (req, res, next) => {
 };
 
 const isBusiness = async (req, res, next) => {
-  const existingUser = await getById(req.user_id);
-  if (existingUser) {
-    if (existingUser.id !== 1) {
-      return res.status(403).json({
-        status: 'error',
-        message: 'You are not allowed to perform this action',
-      });
-    }
-    return next();
+  if (req.user_id !== 1) {
+    return res.status(403).json({
+      status: 'error',
+      message: 'You are not allowed to perform this action',
+    });
   }
-
-  return res.status(404).json({ status: 'error', message: 'User not found' });
+  return next();
 };
 
 const isVolunteer = async (req, res, next) => {
-  const existingUser = await getById(req.user_id);
-  if (existingUser) {
-    if (existingUser.id !== 2) {
-      return res.status(403).json({
-        status: 'error',
-        message: 'You are not allowed to perform this action',
-      });
-    }
-    return next();
+  if (req.user_id !== 2) {
+    return res.status(403).json({
+      status: 'error',
+      message: 'You are not allowed to perform this action',
+    });
   }
-
-  return res.status(404).json({ status: 'error', message: 'User not found' });
+  return next();
 };
 
 export {
