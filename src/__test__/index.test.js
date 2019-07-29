@@ -32,7 +32,6 @@ describe('Utils Validation', () => {
     expect(hashedPassword).to.be.a('string');
 
     const validPassword = verifyPassword(password, hashedPassword);
-    console.log(validPassword);
     expect(validPassword).to.equals(true);
 
     done();

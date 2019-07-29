@@ -16,8 +16,8 @@ class Auth extends BaseController {
   async register(req, res) {
     try {
       const {
- username, email, password, type, name 
-} = req.body;
+        username, email, password, type, name,
+      } = req.body;
 
       const hashedPassword = hashPassword(password);
       const userData = {
