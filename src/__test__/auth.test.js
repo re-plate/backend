@@ -52,22 +52,22 @@ describe('Auth Routes', () => {
       });
   });
 
-  //   it('return validation error if no data is sent', (done) => {
-  //     chai
-  //       .request(app)
-  //       .post('/api/v1/auth/signup')
-  //       .set('Authorization', storeownertoken)
-  //       .end((err, res) => {
-  //         expect(res).to.have.status(400);
-  //         expect(res.body).to.be.an('object');
-  //         expect(res.body.status).to.equal('error');
-  //         expect(res.body.data.email).to.equal('Email field is required');
-  //         expect(res.body.data.password).to.equal('Password field is required');
-  //         expect(res.body.data.name).to.equal('Name field is required');
-  //         expect(res.body.data.type).to.equal('Type field is required');
-  //         done();
-  //       });
-  //   });
+  it('return validation error if no data is sent', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/register')
+
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.data.email).to.equal('Email field is required');
+        expect(res.body.data.password).to.equal('Password field is required');
+        expect(res.body.data.name).to.equal('Name field is required');
+        expect(res.body.data.type).to.equal('Type field is required');
+        done();
+      });
+  });
 
   //   it('return email already exist', (done) => {
   //     chai

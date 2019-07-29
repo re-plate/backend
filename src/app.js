@@ -1,19 +1,19 @@
-import express from "express";
+import express from 'express';
 
-import authRoutes from "./routes/auth";
+import authRoutes from './routes/auth';
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ status: "success", message: "Welcome to Replate API 👋🏾" });
+app.get('/', (req, res) => {
+  res.json({ status: 'success', message: 'Welcome to Replate API 👋🏾' });
 });
 
-app.use("/api/v1/auth", authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 app.use((req, res, next) => {
-  const error = new Error("Route Not found");
+  const error = new Error('Route Not found');
   error.status = 404;
   next(error);
 });
@@ -21,8 +21,8 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
-    status: "error",
-    message: error.message
+    status: 'error',
+    message: error.message,
   });
   next();
 });

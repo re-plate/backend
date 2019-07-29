@@ -1,5 +1,5 @@
 import BaseController from './base';
-import { validateSignupInput } from '../validations/auth';
+
 import { hashPassword } from '../utils';
 import { insert } from '../models/auth';
 
@@ -15,16 +15,9 @@ class Auth extends BaseController {
    */
   async register(req, res) {
     try {
-      const { errors, isValid } = validateSignupInput(req.body);
-
-      // Check validation
-      if (!isValid) {
-        return super.error(res, 400, '', errors);
-      }
-
       const {
- username, email, password, type, name,
-} = req.body;
+        username, email, password, type, name,
+      } = req.body;
 
       const hashedPassword = hashPassword(password);
       const userData = {

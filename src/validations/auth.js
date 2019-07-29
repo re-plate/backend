@@ -84,6 +84,5 @@ const validateSignupInput = (input) => {
   };
 };
 
-const me = '1';
 
-export { validateSignupInput, me };
+export { validateSignupInput };
