@@ -34,7 +34,9 @@
     "url": "https://github.com/re-plate/backend/issues"
   },
   "nyc": {
-    "exclude": []
+    "exclude": [
+      "src/__test__"
+    ]
   },
   "homepage": "https://github.com/re-plate/backend#readme",
   "dependencies": {
