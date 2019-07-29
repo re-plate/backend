@@ -1,6 +1,6 @@
 import BaseController from './base';
 
-import { hashPassword, verifyPassword } from '../utils';
+import { hashPassword, verifyPassword, generateToken } from '../utils';
 import { insert, getByUsername } from '../models/auth';
 
 class Auth extends BaseController {
@@ -66,24 +66,24 @@ class Auth extends BaseController {
       const { username, password } = req.body;
 
       const existingUser = await getByUsername(username);
-      console.log(existingUser);
-      const isValidPassword = verifyPassword(password, existingUser.password);
-      console.log(isValidPassword);
 
-      if (isValidPassword === true) {
-        // const data = {
+      if (existingUser) {
+        const isValidPassword = verifyPassword(password, existingUser.password);
 
-        // }
-        return super.success(res, 200, 'Login successfull');
+        if (isValidPassword === true) {
+          const payload = {
+            id: existingUser.id,
+          };
+          const token = generateToken(payload);
+
+          const data = {
+            token,
+          };
+          return super.success(res, 200, 'Login successful', data);
+        }
+        return super.error(res, 401, 'Invalid Password');
       }
-      return super.error(res, 401, 'Invalid Password');
-
-      // return super.success(
-      //   res,
-      //   201,
-      //   'User registered successfully',
-
-      // );
+      return super.error(res, 404, 'User not found');
     } catch (error) {
       return super.error(res, 500, 'Unable to login user');
     }
