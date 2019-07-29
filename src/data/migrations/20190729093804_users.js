@@ -12,6 +12,7 @@ exports.up = knex => knex.schema.createTable('users', (tbl) => {
     .defaultTo(2);
   tbl.text('email', 128).notNullable();
   tbl.integer('phone').unsigned();
+  tbl.text('name', 128).notNullable();
 });
 
 exports.down = knex => knex.schema.dropTableIfExists('users');
