@@ -69,24 +69,42 @@ describe('Auth Routes', () => {
       });
   });
 
-  //   it('return email already exist', (done) => {
-  //     chai
-  //       .request(app)
-  //       .post('/api/v1/auth/signup')
-  //       .set('Authorization', storeownertoken)
-  //       .send({
-  //         email: 'example@gmail.com',
-  //         name: 'John Example',
-  //         password: '123456',
-  //         type: '1',
-  //       })
-  //       .end((err, res) => {
-  //         expect(res).to.have.status(409);
-  //         expect(res.body).to.be.an('object');
-  //         expect(res.body.data.email).to.equal('Email Already Exist');
-  //         done();
-  //       });
-  //   });
+  it('return email already exist', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/register')
+      .send({
+        username: 'easybuoys',
+        email: 'eze@gmail.com',
+        name: 'Ezekiel Ekunola',
+        password: '123456',
+        type: '1',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('User registered successfully');
+        expect(res.body.status).to.equal('success');
+
+        chai
+          .request(app)
+          .post('/api/v1/auth/register')
+          .send({
+            username: 'easybuoys',
+            email: 'eze@gmail.com',
+            name: 'Ezekiel Ekunola',
+            password: '123456',
+            type: '1',
+          })
+          .end((err2, res2) => {
+            console.log(res2.body);
+            // expect(res).to.have.status(409);
+            // expect(res.body).to.be.an('object');
+            // expect(res.body.message).to.equal('User registered successfully');
+            done();
+          });
+      });
+  });
 
   //   it('return token', (done) => {
   //     chai
