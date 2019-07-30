@@ -27,7 +27,6 @@ const validateToken = async (req, res, next) => {
   try {
     const data = jwt.verify(token, process.env.JWT_SECRET);
     if (data) {
-      console.log(data);
       req.user_id = data.id;
       req.type = data.type;
       const existingUser = await getById(req.user_id);
