@@ -70,6 +70,32 @@ class Request extends BaseController {
       return super.error(res, 500, 'Unable to get requests');
     }
   }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route GET api/v1/requests/:id
+   * @description This function implements the logic for getting request by id for a business.
+   * @access Public
+   */
+  async getRequestById(req, res) {
+    try {
+      const { user_id } = req;
+      const { id } = req.params;
+
+      let request = await getByUserId(user_id, id);
+
+      if (!request) {
+        return super.error(res, 404, 'No Request Found');
+      }
+      request = convertStatus(request);
+      return super.success(res, 200, 'Request gotten successfully', request);
+    } catch (error) {
+      return super.error(res, 500, 'Unable to get requests');
+    }
+  }
 }
 
 export default Request;
