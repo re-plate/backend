@@ -37,7 +37,6 @@ const convertStatus = (data) => {
     });
     return newData;
   }
-  return data;
 };
 
 export {
