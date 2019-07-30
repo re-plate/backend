@@ -125,4 +125,32 @@ describe('Request Routes', () => {
         done();
       });
   });
+
+  it('return gets a request by id', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/1')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request gotten successfully');
+        done();
+      });
+  });
+
+  it('return no request found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/20')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal('No Request Found');
+        done();
+      });
+  });
 });
