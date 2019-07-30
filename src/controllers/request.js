@@ -1,6 +1,8 @@
 import BaseController from './base';
 
-import { insert, getByUserId, get } from '../models/request';
+import {
+ insert, getByUserId, get, getById 
+} from '../models/request';
 import { convertStatus } from '../utils';
 
 class Request extends BaseController {
@@ -84,8 +86,17 @@ class Request extends BaseController {
     try {
       const { user_id } = req;
       const { id } = req.params;
+      let request = '';
+      if (req.type === 1) {
+        request = await getByUserId(user_id, id);
+      } else {
+        request = await getById(id);
+      }
+      console.log(request);
 
-      let request = await getByUserId(user_id, id);
+      if (req.type === 1 && !request) {
+        return super.error(res, 404, 'No Request Found or You do not have the right access');
+      }
 
       if (!request) {
         return super.error(res, 404, 'No Request Found');
@@ -107,7 +118,6 @@ class Request extends BaseController {
    * @access Public
    */
   async getAllRequests(req, res) {
-    console.log('aaaa');
     try {
       let requests = await get();
 
@@ -117,8 +127,7 @@ class Request extends BaseController {
       requests = convertStatus(requests);
       return super.success(res, 200, 'Request gotten successfully', requests);
     } catch (error) {
-      console.log(error);
-      return super.error(res, 500, 'Unable to get requestss');
+      return super.error(res, 500, 'Unable to get requests');
     }
   }
 }

@@ -1,8 +1,8 @@
 import db from '../data/db';
 
 const insert = request => db('requests')
-    .insert(request)
-    .returning('*');
+  .insert(request)
+  .returning('*');
 
 const getByUserId = (user_id, id = '') => {
   const condition = { user_id };
@@ -15,6 +15,10 @@ const getByUserId = (user_id, id = '') => {
   return db('requests').where(condition);
 };
 
+const getById = id => db('requests').where({ id }).first();
+
 const get = () => db('requests');
 
-export { insert, getByUserId, get };
+export {
+  insert, getByUserId, get, getById,
+};

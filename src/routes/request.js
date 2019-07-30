@@ -45,6 +45,6 @@ Router.get('/', validateToken, isBusiness, getRequests);
 // @route   GET api/v1/auth/requests/:id
 // @desc    Get request by id
 // @access  Private
-Router.get('/:id', validateToken, isBusiness, getRequestById);
+Router.get('/:id', validateToken, getRequestById);
 
 export default Router;
