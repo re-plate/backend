@@ -7,7 +7,7 @@ import { validateInput, validateToken, isBusiness } from '../middlewares';
 
 const requestController = new RequestController();
 
-const { createRequest } = requestController;
+const { createRequest, getRequests } = requestController;
 
 const Router = express.Router();
 
@@ -21,5 +21,10 @@ Router.post(
   validateInput(validateRequestInput),
   createRequest,
 );
+
+// @route   GET api/v1/auth/requests
+// @desc    Get all requests
+// @access  Private
+Router.get('/', validateToken, isBusiness, getRequests);
 
 export default Router;

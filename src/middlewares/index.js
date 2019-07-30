@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
+import { getById } from '../models/auth';
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const validateInput = validationMethod => (req, res, next) => {
   next();
 };
 
-const validateToken = (req, res, next) => {
+const validateToken = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
     return res
@@ -26,8 +27,15 @@ const validateToken = (req, res, next) => {
   try {
     const data = jwt.verify(token, process.env.JWT_SECRET);
     if (data) {
+      console.log(data);
       req.user_id = data.id;
       req.type = data.type;
+      const existingUser = await getById(req.user_id);
+      if (!existingUser) {
+        return res
+          .status(404)
+          .json({ status: 'error', message: 'User Not Found' });
+      }
       next();
     }
   } catch (error) {
@@ -58,5 +66,5 @@ const isVolunteer = async (req, res, next) => {
 };
 
 export {
-  validateInput, validateToken, isBusiness, isVolunteer,
+ validateInput, validateToken, isBusiness, isVolunteer 
 };

@@ -10,4 +10,13 @@ const verifyPassword = (password, hash) => bcrypt.compareSync(password, hash);
 
 const generateToken = payload => jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
 
+const getStatus = status => {
+    if (status === 0) {
+        return 'Pending';
+    }
+
+    if (status === 1) {
+        return 'Completed';
+    }
+}
 export { hashPassword, verifyPassword, generateToken };
