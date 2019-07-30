@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/re-plate/backend/blob/develop/LICENSE)
 
 # backend
+
 API Service for replate application 🚀.
 
 > Link to API: https://re-plate.herokuapp.com/
@@ -17,8 +18,6 @@ API Service for replate application 🚀.
 - npm install or yarn install
 - npm migrate or yarn migrate
 - npm run dev or yarn dev
-
-
 
 <pre>
 <h3>Register Route </h3>
@@ -46,6 +45,27 @@ Route: /api/v1/auth/login
 Payload: {
     username: STRING (required),
     password: STRING (required)
+}
+</code>
+</pre>
+
+<pre>
+<h3>Create Request Route </h3>
+<code>
+Access: Private
+Method: POST
+Route: /api/v1/requests
+headers: {
+    Authorization: token
+}
+Payload: {
+    name: STRING (required),
+    food_type: STRING (required),
+    pickup_date: STRING (required),
+    pickup_time: STRING (required),
+    comment: STRING (optional),
+    instruction: STRING (optional),
+
 }
 </code>
 </pre>

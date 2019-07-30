@@ -3,7 +3,7 @@ import express from 'express';
 import AuthController from '../controllers/auth';
 import AuthMiddleware from '../middlewares/auth';
 import { validateSignupInput, validateLoginInput } from '../validations/auth';
-import validateInput from '../middlewares';
+import { validateInput } from '../middlewares';
 
 const authController = new AuthController();
 const authMiddeware = new AuthMiddleware();

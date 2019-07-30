@@ -73,6 +73,7 @@ class Auth extends BaseController {
         if (isValidPassword === true) {
           const payload = {
             id: existingUser.id,
+            type: existingUser.type,
           };
           const token = generateToken(payload);
 

@@ -15,6 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    "consistent-return": 0
+    "consistent-return": 0,
+    "camelcase": 0
   },
 };
