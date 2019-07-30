@@ -1,7 +1,7 @@
 import BaseController from './base';
 
 import {
- insert, getByUserId, get, getById 
+  insert, getByUserId, get, getById,
 } from '../models/request';
 import { convertStatus } from '../utils';
 
