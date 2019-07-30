@@ -85,7 +85,6 @@ describe('Request Routes', () => {
 
   it('return invalid token provided', (done) => {
     const editedToken = `${userToken}chioi`;
-    console.log(editedToken);
     chai
       .request(app)
       .post('/api/v1/requests')
