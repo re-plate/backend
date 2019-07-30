@@ -28,6 +28,7 @@ const validateToken = (req, res, next) => {
     const data = jwt.verify(token, process.env.JWT_SECRET);
     if (data) {
       req.user_id = data.id;
+      req.type = data.type;
       next();
     }
   } catch (error) {
@@ -38,7 +39,7 @@ const validateToken = (req, res, next) => {
 };
 
 const isBusiness = async (req, res, next) => {
-  if (req.user_id !== 1) {
+  if (req.type !== 1) {
     return res.status(403).json({
       status: 'error',
       message: 'You are not allowed to perform this action',
@@ -48,7 +49,7 @@ const isBusiness = async (req, res, next) => {
 };
 
 const isVolunteer = async (req, res, next) => {
-  if (req.user_id !== 2) {
+  if (req.type !== 2) {
     return res.status(403).json({
       status: 'error',
       message: 'You are not allowed to perform this action',
