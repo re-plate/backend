@@ -16,6 +16,7 @@ module.exports = {
   },
   rules: {
     "consistent-return": 0,
-    "camelcase": 0
+    "camelcase": 0,
+    "no-param-reassign": 0
   },
 };

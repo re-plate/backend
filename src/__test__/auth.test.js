@@ -8,6 +8,26 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Auth Routes', () => {
+  before((done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/register')
+      .send({
+        username: 'volunteer',
+        email: 'volunteer@gmail.com',
+        name: 'Ezekiel Ekunola',
+        password: '123456',
+        type: '2',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('User registered successfully');
+        expect(res.body.status).to.equal('success');
+        done();
+      });
+  });
+
   it('creates a user and return user details', (done) => {
     chai
       .request(app)

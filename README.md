@@ -69,3 +69,39 @@ Payload: {
 }
 </code>
 </pre>
+
+<pre>
+<h3>Get All Requests (Business) </h3>
+<code>
+Access: Private
+Method: GET
+Route: /api/v1/requests
+headers: {
+    Authorization: token
+}
+</code>
+</pre>
+
+<pre>
+<h3>Get All Requests (Volunteer) </h3>
+<code>
+Access: Private
+Method: GET
+Route: /api/v1/requests/all
+headers: {
+    Authorization: token 
+}
+</code>
+</pre>
+
+<pre>
+<h3>Get Request By Id </h3>
+<code>
+Access: Private
+Method: GET
+Route: /api/v1/requests/:id
+headers: {
+    Authorization: token
+}
+</code>
+</pre>

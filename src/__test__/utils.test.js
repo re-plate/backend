@@ -2,7 +2,12 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import { generateToken, hashPassword, verifyPassword } from '../utils';
+import {
+  generateToken,
+  hashPassword,
+  verifyPassword,
+  convertStatus,
+} from '../utils';
 
 const { expect } = chai;
 
@@ -34,6 +39,21 @@ describe('Utils Validation', () => {
     const validPassword = verifyPassword(password, hashedPassword);
     expect(validPassword).to.equals(true);
 
+    done();
+  });
+
+  it('converts status of a request', (done) => {
+    const request = [{ status: 0 }, { status: 1 }];
+    const convertedRequest = convertStatus(request);
+    expect(convertedRequest[0].status).to.equals('Pending');
+    expect(convertedRequest[1].status).to.equals('Completed');
+    done();
+  });
+
+  it('converts status of a request', (done) => {
+    const request = { status: 2 };
+    const convertedRequest = convertStatus(request);
+    expect(convertedRequest.status).to.equals('Declined');
     done();
   });
 });

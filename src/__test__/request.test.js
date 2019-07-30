@@ -9,6 +9,7 @@ chai.use(chaiHttp);
 
 describe('Request Routes', () => {
   let userToken = '';
+  let volunteerToken = '';
   before((done) => {
     chai
       .request(app)
@@ -17,10 +18,35 @@ describe('Request Routes', () => {
         username: 'easy',
         password: '123456',
       })
-      .end((err2, res) => {
+      .end((err, res) => {
         const { token } = res.body.data;
-
         userToken = token;
+
+        chai
+          .request(app)
+          .post('/api/v1/auth/login')
+          .send({
+            username: 'volunteer',
+            password: '123456',
+          })
+          .end((err2, res2) => {
+            const token2 = res2.body.data.token;
+            volunteerToken = token2;
+            done();
+          });
+      });
+  });
+
+  it('return request not found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal('No Request Found');
         done();
       });
   });
@@ -94,6 +120,80 @@ describe('Request Routes', () => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal('error');
         expect(res.body.message).to.equal('Invalid Token Provided');
+        done();
+      });
+  });
+
+  it('return requests that has been created', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Requests gotten successfully');
+        done();
+      });
+  });
+
+  it('return gets a request by id', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/1')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request gotten successfully');
+        done();
+      });
+  });
+
+  it('return should return forbidden because user does not have right access', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/all')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal(
+          'You are not allowed to perform this action',
+        );
+        done();
+      });
+  });
+
+  it('return return all reuqests for volunteers', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/all')
+      .set('Authorization', volunteerToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request gotten successfully');
+        done();
+      });
+  });
+
+  it('return no request found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/20')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal(
+          'No Request Found or You do not have the right access',
+        );
         done();
       });
   });
