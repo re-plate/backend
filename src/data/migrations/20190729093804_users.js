@@ -10,7 +10,7 @@ exports.up = knex => knex.schema.createTable('users', (tbl) => {
     .notNullable()
     .unsigned()
     .defaultTo(2);
-  tbl.text('email', 128).notNullable();
+  tbl.text('email', 128).notNullable().unique();
   tbl.integer('phone').unsigned();
   tbl.text('name', 128).notNullable();
 });

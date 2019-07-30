@@ -4,7 +4,7 @@
   "description": "API Service for replate application.",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=testing mocha src/**/*.test.js --require @babel/register  --timeout 10000 --exit || true",
+    "test": "NODE_ENV=testing npm run unmigrate && NODE_ENV=testing npm run migrate && cross-env NODE_ENV=testing mocha src/**/*.test.js --require @babel/register  --timeout 10000 --exit || true",
     "start": "npm run build && npm run serve",
     "dev": "nodemon --exec babel-node src/app",
     "build": "babel src -d build",
@@ -62,6 +62,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "coveralls": "^3.0.5",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",

@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import authRoutes from './routes/auth';
+import requestRoutes from './routes/request';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/requests', requestRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Route Not found');
