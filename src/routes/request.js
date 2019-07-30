@@ -3,11 +3,21 @@ import express from 'express';
 import RequestController from '../controllers/request';
 
 import { validateRequestInput } from '../validations/request';
-import { validateInput, validateToken, isBusiness } from '../middlewares';
+import {
+  validateInput,
+  validateToken,
+  isBusiness,
+  isVolunteer,
+} from '../middlewares';
 
 const requestController = new RequestController();
 
-const { createRequest, getRequests, getRequestById } = requestController;
+const {
+  createRequest,
+  getRequests,
+  getRequestById,
+  getAllRequests,
+} = requestController;
 
 const Router = express.Router();
 
@@ -21,6 +31,11 @@ Router.post(
   validateInput(validateRequestInput),
   createRequest,
 );
+
+// @route   GET api/v1/auth/requests/all
+// @desc    Get all requests.
+// @access  Private
+Router.get('/all', validateToken, isVolunteer, getAllRequests);
 
 // @route   GET api/v1/auth/requests
 // @desc    Get all requests

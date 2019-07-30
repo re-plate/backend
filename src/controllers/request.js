@@ -1,6 +1,6 @@
 import BaseController from './base';
 
-import { insert, getByUserId } from '../models/request';
+import { insert, getByUserId, get } from '../models/request';
 import { convertStatus } from '../utils';
 
 class Request extends BaseController {
@@ -94,6 +94,31 @@ class Request extends BaseController {
       return super.success(res, 200, 'Request gotten successfully', request);
     } catch (error) {
       return super.error(res, 500, 'Unable to get requests');
+    }
+  }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route GET api/v1/requests/all
+   * @description This function implements the logic for getting all requests for a business.
+   * @access Public
+   */
+  async getAllRequests(req, res) {
+    console.log('aaaa');
+    try {
+      let requests = await get();
+
+      if (requests.length === 0) {
+        return super.error(res, 404, 'No Request Found');
+      }
+      requests = convertStatus(requests);
+      return super.success(res, 200, 'Request gotten successfully', requests);
+    } catch (error) {
+      console.log(error);
+      return super.error(res, 500, 'Unable to get requestss');
     }
   }
 }
