@@ -15,4 +15,10 @@ const getByUserId = (user_id, id = '') => {
   return db('requests').where(condition);
 };
 
-export { insert, getByUserId };
+const getById = id => db('requests').where({ id }).first();
+
+const get = () => db('requests');
+
+export {
+  insert, getByUserId, get, getById,
+};
