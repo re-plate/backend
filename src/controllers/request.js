@@ -92,7 +92,6 @@ class Request extends BaseController {
       } else {
         request = await getById(id);
       }
-      console.log(request);
 
       if (req.type === 1 && !request) {
         return super.error(res, 404, 'No Request Found or You do not have the right access');

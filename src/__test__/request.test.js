@@ -140,6 +140,20 @@ describe('Request Routes', () => {
       });
   });
 
+  it('return should return forbidden because user does not have right access', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests/all')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal('You are not allowed to perform this action');
+        done();
+      });
+  });
+
   it('return no request found', (done) => {
     chai
       .request(app)
@@ -149,7 +163,7 @@ describe('Request Routes', () => {
         expect(res).to.have.status(404);
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal('error');
-        expect(res.body.message).to.equal('No Request Found');
+        expect(res.body.message).to.equal('No Request Found or You do not have the right access');
         done();
       });
   });
