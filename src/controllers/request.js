@@ -1,6 +1,7 @@
 import BaseController from './base';
 
 import { insert, getByUserId } from '../models/request';
+import { convertStatus } from '../utils';
 
 class Request extends BaseController {
   /**
@@ -59,10 +60,11 @@ class Request extends BaseController {
     try {
       const { user_id } = req;
 
-      const requests = await getByUserId(user_id);
+      let requests = await getByUserId(user_id);
       if (requests.length === 0) {
         return super.error(res, 404, 'No Request Found');
       }
+      requests = convertStatus(requests);
       return super.success(res, 200, 'Requests gotten successfully', requests);
     } catch (error) {
       return super.error(res, 500, 'Unable to get requests');
