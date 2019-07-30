@@ -69,3 +69,15 @@ Payload: {
 }
 </code>
 </pre>
+
+<pre>
+<h3>Get All Requests Route </h3>
+<code>
+Access: Private
+Method: GET
+Route: /api/v1/requests
+headers: {
+    Authorization: token
+}
+</code>
+</pre>

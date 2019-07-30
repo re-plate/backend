@@ -25,6 +25,20 @@ describe('Request Routes', () => {
       });
   });
 
+  it('return request not found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal('No Request Found');
+        done();
+      });
+  });
+
   it('creates a request and return request details', (done) => {
     chai
       .request(app)
@@ -94,6 +108,20 @@ describe('Request Routes', () => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal('error');
         expect(res.body.message).to.equal('Invalid Token Provided');
+        done();
+      });
+  });
+
+  it('return requests that has been created', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/requests')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Requests gotten successfully');
         done();
       });
   });
