@@ -69,4 +69,33 @@ describe('Request Routes', () => {
         done();
       });
   });
+
+  it('return no token provided', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/requests')
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal('No Token Provided');
+        done();
+      });
+  });
+
+  it('return invalid token provided', (done) => {
+    const editedToken = `${userToken}chioi`;
+    console.log(editedToken);
+    chai
+      .request(app)
+      .post('/api/v1/requests')
+      .set('Authorization', editedToken)
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.message).to.equal('Invalid Token Provided');
+        done();
+      });
+  });
 });
