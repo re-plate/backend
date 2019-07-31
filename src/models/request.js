@@ -34,7 +34,6 @@ const updateRequestStatus = (id, changes) => db('requests')
   .update(changes);
 
 const findRequest = name => db('requests').where('name', 'like', `%${name}%`);
-// .select('name', 'email', 'phone', 'username');
 
 
 export {
@@ -45,5 +44,5 @@ export {
   deleteRequest,
   updateRequest,
   updateRequestStatus,
-  findRequest
+  findRequest,
 };
