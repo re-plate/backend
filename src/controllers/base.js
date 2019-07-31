@@ -10,9 +10,9 @@ class BaseController {
    */
   success(res, status, message = '', data = '') {
     const response = {
-      data,
       status: 'success',
     };
+
     if (message) {
       response.message = message;
     }

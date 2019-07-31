@@ -15,10 +15,16 @@ const getByUserId = (user_id, id = '') => {
   return db('requests').where(condition);
 };
 
-const getById = id => db('requests').where({ id }).first();
+const getById = id => db('requests')
+  .where({ id })
+  .first();
 
 const get = () => db('requests');
 
+const deleteRequest = id => db('requests')
+  .where({ id })
+  .delete();
+
 export {
-  insert, getByUserId, get, getById,
+  insert, getByUserId, get, getById, deleteRequest,
 };

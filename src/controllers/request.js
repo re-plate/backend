@@ -1,7 +1,11 @@
 import BaseController from './base';
 
 import {
-  insert, getByUserId, get, getById,
+  insert,
+  getByUserId,
+  get,
+  getById,
+  deleteRequest,
 } from '../models/request';
 import { convertStatus } from '../utils';
 
@@ -94,7 +98,11 @@ class Request extends BaseController {
       }
 
       if (req.type === 1 && !request) {
-        return super.error(res, 404, 'No Request Found or You do not have the right access');
+        return super.error(
+          res,
+          404,
+          'No Request Found or You do not have the right access',
+        );
       }
 
       if (!request) {
@@ -127,6 +135,33 @@ class Request extends BaseController {
       return super.success(res, 200, 'Request gotten successfully', requests);
     } catch (error) {
       return super.error(res, 500, 'Unable to get requests');
+    }
+  }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route DELETE api/v1/requests/:id
+   * @description This function implements the logic for deleting a for a business.
+   * @access Public
+   */
+  async deleteRequest(req, res) {
+    try {
+      const { id } = req.params;
+
+      const requestExist = await getByUserId(req.user_id, id);
+      if (!requestExist) {
+        return super.error(res, 404, 'Request not found');
+      }
+
+      const deletedRequest = await deleteRequest(id);
+      if (deletedRequest === 1) {
+        return super.success(res, 200, 'Request deleted successfully');
+      }
+    } catch (error) {
+      return super.error(res, 500, 'Unable to delete request');
     }
   }
 }
