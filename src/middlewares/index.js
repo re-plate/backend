@@ -65,5 +65,5 @@ const isVolunteer = async (req, res, next) => {
 };
 
 export {
- validateInput, validateToken, isBusiness, isVolunteer 
+ validateInput, validateToken, isBusiness, isVolunteer,
 };
