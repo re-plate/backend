@@ -220,6 +220,40 @@ describe('Request Routes', () => {
       });
   });
 
+  it('accepts a request', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/requests/1/action')
+      .set('Authorization', volunteerToken)
+      .send({
+        status: '1',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request accepted successfully');
+        done();
+      });
+  });
+
+  it('returns request accepted already', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/requests/1/action')
+      .set('Authorization', volunteerToken)
+      .send({
+        status: '1',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(409);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request has been accepted already, Kindly search for pending request(s)');
+        done();
+      });
+  });
+
   it('return deletes a request', (done) => {
     chai
       .request(app)
