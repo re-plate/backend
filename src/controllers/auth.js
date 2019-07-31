@@ -2,6 +2,7 @@ import BaseController from './base';
 
 import { hashPassword, verifyPassword, generateToken } from '../utils';
 import { insert, getByUsername } from '../models/auth';
+import sendMessage from '../services/Sms';
 
 class Auth extends BaseController {
   /**
@@ -16,8 +17,8 @@ class Auth extends BaseController {
   async register(req, res) {
     try {
       const {
-        username, email, password, type, name,
-      } = req.body;
+ username, email, password, type, name, phone,
+} = req.body;
 
       const hashedPassword = hashPassword(password);
       const userData = {
@@ -25,6 +26,7 @@ class Auth extends BaseController {
         email,
         type,
         name,
+        phone,
         password: hashedPassword,
       };
 
@@ -39,7 +41,10 @@ class Auth extends BaseController {
           name: newUser[0].name,
           id: newUser[0].id,
         };
-
+        if (phone) {
+          const message = `Hello ${name}, thank you for registering on replate platform, it's great to have you.`;
+          sendMessage(phone, message);
+        }
         return super.success(
           res,
           201,
