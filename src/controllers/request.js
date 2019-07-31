@@ -207,6 +207,25 @@ class Request extends BaseController {
       return super.error(res, 500, 'Unable to delete request');
     }
   }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route POST api/v1/requests/:id/action
+   * @description This function implements the logic for accepting a request a for a business.
+   * @access Public
+   */
+  async requestAction(req, res) {
+    try {
+      const {id } = req.params;
+      const {status} = req.body;
+      
+    } catch (error) {
+      return super.error(res, 500, 'Unable to perform action on this request');
+    }
+  }
 }
 
 export default Request;
