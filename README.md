@@ -138,3 +138,18 @@ headers: {
 }
 </code>
 </pre>
+
+<pre>
+<h3>Accept Request By Id (Volunteer)</h3>
+<code>
+Access: Private
+Method: POST
+Route: /api/v1/requests/:id/action
+headers: {
+    Authorization: token
+}
+Payload: {
+    status: INTEGER (required)
+}
+</code>
+</pre>
