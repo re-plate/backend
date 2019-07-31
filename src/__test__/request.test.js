@@ -197,4 +197,37 @@ describe('Request Routes', () => {
         done();
       });
   });
+
+  it('return deletes a request', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/requests/1')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal(
+          'Request deleted successfully',
+        );
+        done();
+      });
+  });
+
+  // it('return deletes a request', (done) => {
+  //   chai
+  //     .request(app)
+  //     .delete('/api/v1/requests/1')
+  //     .set('Authorization', userToken)
+  //     .end((err, res) => {
+  //       console.log(res.body);
+  //       expect(res).to.have.status(200);
+  //       expect(res.body).to.be.an('object');
+  //       expect(res.body.status).to.equal('success');
+  //       expect(res.body.message).to.equal(
+  //         'Request deleted successfully',
+  //       );
+  //       done();
+  //     });
+  // });
 });

@@ -17,7 +17,7 @@ const {
   getRequests,
   getRequestById,
   getAllRequests,
-  deleteRequest
+  deleteRequest,
 } = requestController;
 
 const Router = express.Router();
