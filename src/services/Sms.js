@@ -23,4 +23,5 @@ const sendMessage = (phone, message) => {
       .catch(err => err);
   }
 };
+
 export default sendMessage;
