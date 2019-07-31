@@ -36,7 +36,8 @@
   },
   "nyc": {
     "exclude": [
-      "src/__test__"
+      "src/__test__",
+      "src/services"
     ]
   },
   "homepage": "https://github.com/re-plate/backend#readme",

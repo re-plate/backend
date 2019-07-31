@@ -19,7 +19,8 @@ const sendMessage = (phone, message) => {
         from: TWILIO_SENDER_NUMBER,
         to: phone,
       })
-      .then(res => res);
+      .then(res => res)
+      .catch(err => err);
   }
 };
 
