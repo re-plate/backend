@@ -4,6 +4,7 @@ import morgan from 'morgan';
 
 import authRoutes from './routes/auth';
 import requestRoutes from './routes/request';
+import searchRoutes from './routes/search';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/requests', requestRoutes);
+app.use('/api/v1/search', searchRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Route Not found');

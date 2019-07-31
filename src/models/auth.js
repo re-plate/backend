@@ -16,6 +16,8 @@ const getById = id => db('users')
   .where({ id })
   .first();
 
+const findBusiness = name => db('users').where('name', 'like', `%${name}%`).select('name', 'email', 'phone', 'username');
+
 export {
-  insert, getByUsername, getByEmail, getById,
+  insert, getByUsername, getByEmail, getById, findBusiness,
 };

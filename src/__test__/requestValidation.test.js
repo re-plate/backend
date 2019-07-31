@@ -2,7 +2,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import { validateRequestInput } from '../validations/request';
+import { validateRequestInput, validateActionInput } from '../validations/request';
 
 const { expect } = chai;
 
@@ -29,6 +29,36 @@ describe('Request Validation', () => {
     expect(result.errors.food_type).to.equal('Food Type field is required');
     expect(result.errors.pickup_date).to.equal('Pickup Date field is required');
     expect(result.errors.pickup_time).to.equal('Pickup Time field is required');
+    expect(result.errors).to.be.an('object');
+    done();
+  });
+
+  it('returns empty object because all validation is passed', (done) => {
+    const result = validateActionInput({
+      status: '1',
+    });
+    expect(result.isValid).to.equal(true);
+    expect(Object.keys(result.errors).length).to.equal(0);
+    done();
+  });
+
+  it('returns object of validation required', (done) => {
+    const result = validateActionInput({});
+    expect(result.isValid).to.equal(false);
+    expect(Object.keys(result.errors).length).to.be.greaterThan(0);
+    expect(result.errors.status).to.equal('status field is required');
+    expect(result.errors).to.be.an('object');
+    done();
+  });
+
+  it('returns object of validation required', (done) => {
+    const result = validateActionInput({
+      status: 0,
+    });
+
+    expect(result.isValid).to.equal(false);
+    expect(Object.keys(result.errors).length).to.be.greaterThan(0);
+    expect(result.errors.status).to.equal('Invalid status. status cannot be greater than 1');
     expect(result.errors).to.be.an('object');
     done();
   });

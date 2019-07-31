@@ -38,4 +38,33 @@ const validateRequestInput = (input) => {
   };
 };
 
-export { validateRequestInput };
+const validateActionInput = (input) => {
+  const errors = {};
+  const data = input;
+
+  data.status = !isEmpty(data.status) ? data.status : '';
+
+  if (typeof data.status === 'number') {
+    data.status = String(data.status);
+  }
+
+  if (Validator.isInt(data.status)) {
+    if (data.status > 2 || data.status < 1) {
+      errors.status = 'Invalid status. status cannot be greater than 1';
+    }
+  }
+
+  if (!Validator.isInt(data.status)) {
+    errors.status = 'status field must be a number';
+  }
+
+  if (!data.status) {
+    errors.status = 'status field is required';
+  }
+  return {
+    errors,
+    isValid: isEmpty(errors),
+  };
+};
+
+export { validateRequestInput, validateActionInput };
