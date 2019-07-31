@@ -32,7 +32,7 @@ Payload: {
     email: STRING (required),
     password: STRING (required),
     type: INTEGER (required),
-    phone: INTEGER (optional)
+    phone: STRING (optional)
 }
 </code>
 </pre>

@@ -38,6 +38,7 @@ describe('Auth Routes', () => {
         name: 'Ezekiel Ekunola',
         password: '123456',
         type: '1',
+        phone: '+2348429751500',
       })
       .end((err, res) => {
         expect(res).to.have.status(201);
