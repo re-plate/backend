@@ -248,7 +248,7 @@ describe('Request Routes', () => {
       .end((err, res) => {
         expect(res).to.have.status(409);
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal('success');
+        expect(res.body.status).to.equal('error');
         expect(res.body.message).to.equal('Request has been accepted already, Kindly search for pending request(s)');
         done();
       });

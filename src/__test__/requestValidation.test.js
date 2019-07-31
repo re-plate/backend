@@ -50,4 +50,16 @@ describe('Request Validation', () => {
     expect(result.errors).to.be.an('object');
     done();
   });
+
+  it('returns object of validation required', (done) => {
+    const result = validateActionInput({
+      status: 0,
+    });
+
+    expect(result.isValid).to.equal(false);
+    expect(Object.keys(result.errors).length).to.be.greaterThan(0);
+    expect(result.errors.status).to.equal('Invalid status. status cannot be greater than 1');
+    expect(result.errors).to.be.an('object');
+    done();
+  });
 });
