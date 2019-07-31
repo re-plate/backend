@@ -70,4 +70,9 @@ Router.put(
 // @access  Private
 Router.delete('/:id', validateToken, isBusiness, deleteRequest);
 
+// @route   POST api/v1/auth/requests/action
+// @desc    Deletes a request by id
+// @access  Private
+Router.delete('/:id', validateToken, isBusiness, deleteRequest);
+
 export default Router;
