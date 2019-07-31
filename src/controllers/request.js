@@ -7,6 +7,7 @@ import {
   getById,
   deleteRequest,
   updateRequest,
+  updateRequestStatus,
 } from '../models/request';
 import { convertStatus } from '../utils';
 
@@ -205,6 +206,44 @@ class Request extends BaseController {
       }
     } catch (error) {
       return super.error(res, 500, 'Unable to delete request');
+    }
+  }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route POST api/v1/requests/:id/action
+   * @description This function implements the logic for accepting a request a for a business.
+   * @access Public
+   */
+  async requestAction(req, res) {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      const { user_id } = req;
+
+      const requestExist = await getById(id);
+
+      if (!requestExist) {
+        return super.error(res, 404, 'Request not found');
+      }
+
+      if (requestExist.status === 1) {
+        return super.error(
+          res,
+          409,
+          'Request has been accepted already, Kindly search for pending request(s)',
+        );
+      }
+
+      const updatedStatus = await updateRequestStatus(id, { status, volunteer_user_id: user_id });
+      if (updatedStatus === 1) {
+        return super.success(res, 200, 'Request accepted successfully');
+      }
+    } catch (error) {
+      return super.error(res, 500, 'Unable to perform action on this request');
     }
   }
 }

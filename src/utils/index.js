@@ -16,11 +16,11 @@ const getStatus = (status) => {
   }
 
   if (status === 1) {
-    return 'Completed';
+    return 'Accepted';
   }
 
   if (status === 2) {
-    return 'Declined';
+    return 'Rejected';
   }
 };
 

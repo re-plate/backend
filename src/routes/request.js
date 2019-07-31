@@ -2,7 +2,10 @@ import express from 'express';
 
 import RequestController from '../controllers/request';
 
-import { validateRequestInput } from '../validations/request';
+import {
+  validateRequestInput,
+  validateActionInput,
+} from '../validations/request';
 import {
   validateInput,
   validateToken,
@@ -19,6 +22,7 @@ const {
   getAllRequests,
   deleteRequest,
   updateRequest,
+  requestAction,
 } = requestController;
 
 const Router = express.Router();
@@ -69,5 +73,16 @@ Router.put(
 // @desc    Deletes a request by id
 // @access  Private
 Router.delete('/:id', validateToken, isBusiness, deleteRequest);
+
+// @route   POST api/v1/auth/requests/:id/action
+// @desc    Volunteer updates a request
+// @access  Private
+Router.post(
+  '/:id/action',
+  validateToken,
+  isVolunteer,
+  validateInput(validateActionInput),
+  requestAction,
+);
 
 export default Router;

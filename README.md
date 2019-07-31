@@ -105,3 +105,51 @@ headers: {
 }
 </code>
 </pre>
+
+<pre>
+<h3>Update Request Route </h3>
+<code>
+Access: Private
+Method: PUT
+Route: /api/v1/requests/:id
+headers: {
+    Authorization: token
+}
+Payload: {
+    name: STRING (required),
+    food_type: STRING (required),
+    pickup_date: STRING (required),
+    pickup_time: STRING (required),
+    comment: STRING (optional),
+    instruction: STRING (optional),
+
+}
+</code>
+</pre>
+
+<pre>
+<h3>Delete Request By Id </h3>
+<code>
+Access: Private
+Method: DELETE
+Route: /api/v1/requests/:id
+headers: {
+    Authorization: token
+}
+</code>
+</pre>
+
+<pre>
+<h3>Accept Request By Id (Volunteer)</h3>
+<code>
+Access: Private
+Method: POST
+Route: /api/v1/requests/:id/action
+headers: {
+    Authorization: token
+}
+Payload: {
+    status: INTEGER (required)
+}
+</code>
+</pre>
