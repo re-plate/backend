@@ -45,11 +45,9 @@ class Auth extends BaseController {
           id: newUser[0].id,
         };
 
-        if (process.env.NODE_ENV === 'production') {
-          if (phone) {
-            const message = `Hello ${name}, thank you for registering on replate platform, it's great to have you.`;
-            sendMessage(phone, message);
-          }
+        if (phone) {
+          const message = `Hello ${name}, thank you for registering on replate platform, it's great to have you.`;
+          sendMessage(phone, message);
         }
 
         return super.success(

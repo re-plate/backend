@@ -12,13 +12,15 @@ const {
 const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 const sendMessage = (phone, message) => {
-  client.messages
-    .create({
-      body: message,
-      from: TWILIO_SENDER_NUMBER,
-      to: phone,
-    })
-    .then(res => res);
+  if (process.env.NODE_ENV === 'production') {
+    client.messages
+      .create({
+        body: message,
+        from: TWILIO_SENDER_NUMBER,
+        to: phone,
+      })
+      .then(res => res);
+  }
 };
 
 export default sendMessage;
