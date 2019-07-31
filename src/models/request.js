@@ -25,6 +25,10 @@ const deleteRequest = id => db('requests')
   .where({ id })
   .delete();
 
+const updateRequest = (id, changes) => db('requests')
+  .where({ id })
+  .update(changes);
+
 export {
-  insert, getByUserId, get, getById, deleteRequest,
+  insert, getByUserId, get, getById, deleteRequest, updateRequest,
 };
