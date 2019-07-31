@@ -1,4 +1,4 @@
-import client from 'twilio';
+import twilio from 'twilio';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -10,11 +10,11 @@ const {
   NODE_ENV,
 } = process.env;
 
-const twilioClient = client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 const sendMessage = (phone, message) => {
   if (NODE_ENV === 'production') {
-    twilioClient.messages
+    client.messages
       .create({
         body: message,
         from: TWILIO_SENDER_NUMBER,
