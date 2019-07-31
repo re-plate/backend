@@ -2,6 +2,14 @@ import { getByUsername, getByEmail } from '../models/auth';
 import BaseController from '../controllers/base';
 
 class AuthMiddleware extends BaseController {
+  /**
+ * validateUserName
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} object
+ * @description This function validates the username to see if it does not exist in the database.
+ */
   async validateUserName(req, res, next) {
     const { username } = req.body;
     const user = await getByUsername(username);
@@ -11,6 +19,14 @@ class AuthMiddleware extends BaseController {
     next();
   }
 
+  /**
+ * validateEmail
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} object
+ * @description This function validates the email to see if it does not exist in the database.
+ */
   async validateEmail(req, res, next) {
     const { email } = req.body;
 

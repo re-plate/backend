@@ -17,6 +17,8 @@ const {
   getRequests,
   getRequestById,
   getAllRequests,
+  deleteRequest,
+  updateRequest,
 } = requestController;
 
 const Router = express.Router();
@@ -46,5 +48,26 @@ Router.get('/', validateToken, isBusiness, getRequests);
 // @desc    Get request by id
 // @access  Private
 Router.get('/:id', validateToken, getRequestById);
+
+// @route   GET api/v1/auth/requests/:id
+// @desc    Get request by id
+// @access  Private
+Router.get('/:id', validateToken, isBusiness, getRequestById);
+
+// @route   PUT api/v1/auth/requests/:id
+// @desc    Updates a request by id
+// @access  Private
+Router.put(
+  '/:id',
+  validateToken,
+  isBusiness,
+  validateInput(validateRequestInput),
+  updateRequest,
+);
+
+// @route   DELETE api/v1/auth/requests/:id
+// @desc    Deletes a request by id
+// @access  Private
+Router.delete('/:id', validateToken, isBusiness, deleteRequest);
 
 export default Router;

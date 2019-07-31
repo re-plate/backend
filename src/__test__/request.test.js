@@ -197,4 +197,40 @@ describe('Request Routes', () => {
         done();
       });
   });
+
+  it('updates a request', (done) => {
+    chai
+      .request(app)
+      .put('/api/v1/requests/1')
+      .set('Authorization', userToken)
+      .send({
+        pickup_time: '10pm',
+        pickup_date: '2019-09-12',
+        name: 'Request',
+        food_type: 'Fruits',
+        comment: 'No comment',
+        instruction: 'Call before coming',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request updated successfully');
+        done();
+      });
+  });
+
+  it('return deletes a request', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/requests/1')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Request deleted successfully');
+        done();
+      });
+  });
 });

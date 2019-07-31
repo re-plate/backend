@@ -1,7 +1,12 @@
 import BaseController from './base';
 
 import {
-  insert, getByUserId, get, getById,
+  insert,
+  getByUserId,
+  get,
+  getById,
+  deleteRequest,
+  updateRequest,
 } from '../models/request';
 import { convertStatus } from '../utils';
 
@@ -94,7 +99,11 @@ class Request extends BaseController {
       }
 
       if (req.type === 1 && !request) {
-        return super.error(res, 404, 'No Request Found or You do not have the right access');
+        return super.error(
+          res,
+          404,
+          'No Request Found or You do not have the right access',
+        );
       }
 
       if (!request) {
@@ -127,6 +136,75 @@ class Request extends BaseController {
       return super.success(res, 200, 'Request gotten successfully', requests);
     } catch (error) {
       return super.error(res, 500, 'Unable to get requests');
+    }
+  }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route PUT api/v1/requests/:id
+   * @description This function implements the logic for updating a for a business.
+   * @access Public
+   */
+  async updateRequest(req, res) {
+    try {
+      const { id } = req.params;
+      const {
+        name,
+        food_type,
+        pickup_date,
+        pickup_time,
+        comment,
+        instruction,
+      } = req.body;
+      const requestExist = await getByUserId(req.user_id, id);
+      if (!requestExist) {
+        return super.error(res, 404, 'Request not found');
+      }
+
+      const updatedRequest = await updateRequest(id, {
+        name,
+        food_type,
+        pickup_date,
+        pickup_time,
+        comment,
+        instruction,
+      });
+
+      if (updatedRequest === 1) {
+        return super.success(res, 200, 'Request updated successfully');
+      }
+    } catch (error) {
+      return super.error(res, 500, 'Unable to update request');
+    }
+  }
+
+  /**
+   * Register Route
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} object
+   * @route DELETE api/v1/requests/:id
+   * @description This function implements the logic for deleting a for a business.
+   * @access Public
+   */
+  async deleteRequest(req, res) {
+    try {
+      const { id } = req.params;
+
+      const requestExist = await getByUserId(req.user_id, id);
+      if (!requestExist) {
+        return super.error(res, 404, 'Request not found');
+      }
+
+      const deletedRequest = await deleteRequest(id);
+      if (deletedRequest === 1) {
+        return super.success(res, 200, 'Request deleted successfully');
+      }
+    } catch (error) {
+      return super.error(res, 500, 'Unable to delete request');
     }
   }
 }
