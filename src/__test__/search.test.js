@@ -75,7 +75,7 @@ describe('Search Routes', () => {
       .get('/api/v1/search/business?name=mybusiness')
       .set('Authorization', volunteerToken)
       .end((err, res) => {
-        expect(res2).to.have.status(404);
+        expect(res).to.have.status(404);
         expect(res.body).to.be.an('object');
         expect(res.body.message).to.equal('No business found with search parameter');
         expect(res.body.status).to.equal('error');
