@@ -2,7 +2,7 @@ import express from 'express';
 
 import SearchController from '../controllers/search';
 
-import { validateToken, isBusiness, isVolunteer } from '../middlewares';
+import { validateToken, isVolunteer } from '../middlewares';
 
 const searchController = new SearchController();
 
