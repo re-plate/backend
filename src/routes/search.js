@@ -6,7 +6,7 @@ import { validateToken, isVolunteer } from '../middlewares';
 
 const searchController = new SearchController();
 
-const { searchBusiness } = searchController;
+const { searchBusiness, searchRequest } = searchController;
 
 const Router = express.Router();
 
@@ -14,5 +14,10 @@ const Router = express.Router();
 // @desc    Search Business.
 // @access  Private
 Router.get('/business', validateToken, isVolunteer, searchBusiness);
+
+// @route   GET api/v1/auth/search/requests?name=query
+// @desc    Search Requests.
+// @access  Private
+Router.get('/requests', validateToken, isVolunteer, searchRequest);
 
 export default Router;

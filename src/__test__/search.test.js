@@ -77,7 +77,57 @@ describe('Search Routes', () => {
       .end((err, res) => {
         expect(res).to.have.status(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('No business found with search parameter');
+        expect(res.body.message).to.equal(
+          'No business found with search parameter',
+        );
+        expect(res.body.status).to.equal('error');
+        done();
+      });
+  });
+
+  it('search request', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/requests')
+      .send({
+        pickup_time: '10pm',
+        pickup_date: '2019-09-12',
+        name: 'my request',
+        food_type: 'Beverage',
+        comment: 'No comment',
+        instruction: 'Call before coming',
+      })
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('Request created successfully');
+        expect(res.body.status).to.equal('success');
+        chai
+          .request(app)
+          .get('/api/v1/search/requests?name=req')
+          .set('Authorization', volunteerToken)
+          .end((err2, res2) => {
+            expect(res2).to.have.status(200);
+            expect(res2.body).to.be.an('object');
+            expect(res2.body.message).to.equal('Request gotten successfully');
+            expect(res2.body.status).to.equal('success');
+            done();
+          });
+      });
+  });
+
+  it('returns request not found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/search/requests?name=mybusiness')
+      .set('Authorization', volunteerToken)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal(
+          'No request found with search parameter',
+        );
         expect(res.body.status).to.equal('error');
         done();
       });

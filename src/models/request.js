@@ -33,6 +33,9 @@ const updateRequestStatus = (id, changes) => db('requests')
   .where({ id })
   .update(changes);
 
+const findRequest = name => db('requests').where('name', 'like', `%${name}%`);
+
+
 export {
   insert,
   getByUserId,
@@ -41,4 +44,5 @@ export {
   deleteRequest,
   updateRequest,
   updateRequestStatus,
+  findRequest,
 };
