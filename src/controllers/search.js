@@ -15,10 +15,10 @@ class Search extends BaseController {
   async searchBusiness(req, res) {
     try {
       const { name } = req.query;
-
+        
       const businesses = await findBusiness(name);
       if (businesses.length === 0) {
-        return super.success(
+        return super.error(
           res,
           404,
           'No business found with search parameter',
