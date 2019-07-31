@@ -223,9 +223,9 @@ class Request extends BaseController {
       const { id } = req.params;
       const { status } = req.body;
       const { user_id } = req;
-      console.log(user_id);
+
       const requestExist = await getById(id);
-      console.log(requestExist);
+
       if (!requestExist) {
         return super.error(res, 404, 'Request not found');
       }

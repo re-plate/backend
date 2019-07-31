@@ -46,14 +46,14 @@ describe('Utils Validation', () => {
     const request = [{ status: 0 }, { status: 1 }];
     const convertedRequest = convertStatus(request);
     expect(convertedRequest[0].status).to.equals('Pending');
-    expect(convertedRequest[1].status).to.equals('Completed');
+    expect(convertedRequest[1].status).to.equals('Accepted');
     done();
   });
 
   it('converts status of a request', (done) => {
     const request = { status: 2 };
     const convertedRequest = convertStatus(request);
-    expect(convertedRequest.status).to.equals('Declined');
+    expect(convertedRequest.status).to.equals('Rejected');
     done();
   });
 });
