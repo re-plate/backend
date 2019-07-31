@@ -153,3 +153,15 @@ Payload: {
 }
 </code>
 </pre>
+
+<pre>
+<h3>Search Business (Volunteer)</h3>
+<code>
+Access: Private
+Method: GET
+Route: /api/v1/search/business?name=query
+headers: {
+    Authorization: token
+}
+</code>
+</pre>
