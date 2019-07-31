@@ -7,6 +7,7 @@ import {
   getById,
   deleteRequest,
   updateRequest,
+  updateRequestStatus,
 } from '../models/request';
 import { convertStatus } from '../utils';
 
@@ -219,9 +220,28 @@ class Request extends BaseController {
    */
   async requestAction(req, res) {
     try {
-      const {id } = req.params;
-      const {status} = req.body;
-      
+      const { id } = req.params;
+      const { status } = req.body;
+      const { user_id } = req;
+      console.log(user_id);
+      const requestExist = await getById(id);
+      console.log(requestExist);
+      if (!requestExist) {
+        return super.error(res, 404, 'Request not found');
+      }
+
+      if (requestExist.status === 1) {
+        return super.error(
+          res,
+          409,
+          'Request has been accepted already, Kindly search for pending request(s)',
+        );
+      }
+
+      const updatedStatus = await updateRequestStatus(id, { status });
+      if (updatedStatus === 1) {
+        return super.success(res, 200, 'Request accepted successfully');
+      }
     } catch (error) {
       return super.error(res, 500, 'Unable to perform action on this request');
     }

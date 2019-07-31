@@ -49,7 +49,7 @@ const validateActionInput = (input) => {
   }
 
   if (Validator.isInt(data.status)) {
-    if (data.status > 2) {
+    if (data.status > 2 || data.status < 1) {
       errors.status = 'Invalid status. status cannot be greater than 1';
     }
   }

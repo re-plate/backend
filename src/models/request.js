@@ -29,6 +29,16 @@ const updateRequest = (id, changes) => db('requests')
   .where({ id })
   .update(changes);
 
+const updateRequestStatus = (id, changes) => db('requests')
+  .where({ id })
+  .update(changes);
+
 export {
-  insert, getByUserId, get, getById, deleteRequest, updateRequest,
+  insert,
+  getByUserId,
+  get,
+  getById,
+  deleteRequest,
+  updateRequest,
+  updateRequestStatus,
 };
