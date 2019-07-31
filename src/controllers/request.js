@@ -238,7 +238,7 @@ class Request extends BaseController {
         );
       }
 
-      const updatedStatus = await updateRequestStatus(id, { status });
+      const updatedStatus = await updateRequestStatus(id, { status, volunteer_user_id: user_id });
       if (updatedStatus === 1) {
         return super.success(res, 200, 'Request accepted successfully');
       }

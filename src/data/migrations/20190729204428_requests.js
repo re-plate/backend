@@ -7,7 +7,7 @@ exports.up = knex => knex.schema.createTable('requests', (tbl) => {
   tbl.text('comment', 128);
   tbl.text('instruction', 128);
   tbl.integer('status').defaultsTo(0);
-  tbl.integer('volunteer_id');
+  tbl.integer('volunteer_user_id');
   tbl
     .integer('user_id')
     .unsigned()
