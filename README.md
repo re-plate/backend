@@ -76,6 +76,15 @@ You need Nodejs Installed to be able to run this project on your machine.
 | ---------------                 | --------------|-----------------------------------------------|---------------|
 | Register User                   | POST          | /api/v1/auth/register                         | PUBLIC        |
 | Login User                      | POST          | /api/v1/auth/login                            | PUBLIC        |
+| Create Request                  | POST          | /api/v1/requests/                             | PRIVATE       |
+| Get All Requests                | GET           | /api/v1/requests/all                          | PRIVATE       |
+| Get Request By Id               | GET           | /api/v1/requests/:id                          | PRIVATE       |
+| Update Request                  | PUT           | /api/v1/requests/:id                          | PRIVATE       |
+| Delete Request                  | DELETE        | /api/v1/requests/:id                          | PRIVATE       |
+| Get Created Requests            | GET           | /api/v1/requests/                             | PRIVATE       |
+| Accept Request                  | POST          | /api/v1/requests/:id/action                   | PRIVATE       |
+| Search Business                 | GET           | /api/v1/search/business?name=query            | PRIVATE       |
+| Search Request                  | GET           | /api/v1/search/requests                       | PRIVATE       |
 
 
 
