@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import helmet from 'helmet';
 
 import authRoutes from './routes/auth';
 import requestRoutes from './routes/request';
@@ -8,6 +9,7 @@ import searchRoutes from './routes/search';
 
 const app = express();
 
+app.use(helmet());
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
