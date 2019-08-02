@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/re-plate/backend/badge.svg?branch=develop)](https://coveralls.io/github/re-plate/backend?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/db6e138ab94fed11b5ba/maintainability)](https://codeclimate.com/github/re-plate/backend/maintainability)
 [![](https://img.shields.io/badge/Protected_by-Hound-a873d1.svg)](https://houndci.com)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/re-plate/backend.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/re-plate/backend/context:javascript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/re-plate/backend/blob/develop/LICENSE)
 
 # backend
@@ -19,6 +20,74 @@ API Service for replate application 🚀.
 - npm install or yarn install
 - npm migrate or yarn migrate
 - npm run dev or yarn dev
+
+## Built With
+<ul>
+<li><a href="https://nodejs.org/en/">Nodejs</a></li>
+<li><a href="https://expressjs.com/">Expressjs</a></li>
+</ul>
+
+## Testing Tools
+<ul>
+<li><a href="https://mochajs.org/">Mocha</a></li>
+<li><a href="https://www.chaijs.com/">Chai</a></li>
+</ul>
+
+
+## Getting Started
+
+<h3>Prerequisites</h3>
+You need Nodejs Installed to be able to run this project on your machine.
+
+<h3>Installing<h3>
+<ul><li>Clone Repository</li></ul>
+<pre><code>git clone https://github.com/re-plate/backend</code> </pre>
+<br>
+<br>
+
+<ul><li>Change Directory To Backend</li></ul>
+<pre><code>cd backend</code></pre>
+<br>
+<br>
+
+<ul><li>Install Dependencies</li></ul>
+<pre><code>npm install</code></pre>
+<br>
+<br>
+
+<ul><li>Start Application</li></ul>
+<pre><code>npm start</code></pre>
+<br>
+<br>
+
+<ul><li>Run Test</li></ul>
+<pre><code>npm test</code></pre>
+<br>
+<br>
+
+<ul><li>Run Coverage Report</li></ul>
+<pre><code>npm run coveralls</code></pre>
+<br>
+
+
+<h2>API Routes</h2> <br>
+
+| DESCRIPTION                     | HTTP METHOD   | ROUTES                                        | ACCESS        |
+| ---------------                 | --------------|-----------------------------------------------|---------------|
+| Register User                   | POST          | /api/v1/auth/register                         | PUBLIC        |
+| Login User                      | POST          | /api/v1/auth/login                            | PUBLIC        |
+| Create Request                  | POST          | /api/v1/requests/                             | PRIVATE       |
+| Get All Requests                | GET           | /api/v1/requests/all                          | PRIVATE       |
+| Get Request By Id               | GET           | /api/v1/requests/:id                          | PRIVATE       |
+| Update Request                  | PUT           | /api/v1/requests/:id                          | PRIVATE       |
+| Delete Request                  | DELETE        | /api/v1/requests/:id                          | PRIVATE       |
+| Get Created Requests            | GET           | /api/v1/requests/                             | PRIVATE       |
+| Accept Request                  | POST          | /api/v1/requests/:id/action                   | PRIVATE       |
+| Search Business                 | GET           | /api/v1/search/business?name=query            | PRIVATE       |
+| Search Request                  | GET           | /api/v1/search/requests                       | PRIVATE       |
+
+
+
 
 <pre>
 <h3>Register Route </h3>
@@ -166,3 +235,4 @@ headers: {
 }
 </code>
 </pre>
+
